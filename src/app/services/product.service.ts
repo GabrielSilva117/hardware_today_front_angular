@@ -16,6 +16,7 @@ export class ProductService {
   constructor() {
     this.api = axios.create({
       baseURL: environment.apiUrl + '/products',
+      withCredentials: true
     })
   }
 
