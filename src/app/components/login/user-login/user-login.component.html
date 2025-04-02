@@ -1,0 +1,10 @@
+<div>
+  <h2>
+    Login Page
+  </h2>
+  <form (ngSubmit)="onSubmit()" class="d-grid" [formGroup]="loginForm">
+    <app-default-field fieldLabel = "E-mail" formControlName="email"/>
+    <app-password-field formControlName="password"/>
+    <button mat-raised-button [disabled]="isSubmitting">Login</button>
+  </form>
+</div>
