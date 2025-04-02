@@ -1,4 +1,4 @@
-interface AddressModel {
+export default interface AddressModel {
   cep: string;
   address: string;
   neighborhood: string;

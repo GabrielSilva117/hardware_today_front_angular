@@ -1,3 +1,5 @@
+import AddressModel from "../user/AddressModel";
+
 export default interface UserModel {
   firstName: string;
   lastName: string;
