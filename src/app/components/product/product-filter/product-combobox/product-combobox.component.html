@@ -1,8 +1,9 @@
 <mat-form-field>
   <mat-label>{{label}}</mat-label>
-  <mat-select [formControl]="formControl" multiple>
+  <mat-select [multiple] = multiple
+              [(value)]="value" (selectionChange)="setValue($event)">
     @for (item of itemsToList; track item) {
-      <mat-option [value]="item.id" >{{item.name}}</mat-option>
+      <mat-option [value]="item[valueKey]" >{{item[labelKey]}}</mat-option>
     }
   </mat-select>
 </mat-form-field>
