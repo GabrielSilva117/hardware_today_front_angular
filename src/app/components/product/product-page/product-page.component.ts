@@ -3,6 +3,7 @@ import {ProductListComponent} from '../product-list/product-list.component';
 import {ProductFilterComponent} from '../product-filter/product-filter.component';
 import {ProductModel} from '../../../models/product/ProductModel';
 import {ProductService} from '../../../services/product.service';
+import FilterModel from '../../../models/product/FilterModel';
 
 @Component({
   selector: 'app-product-page',
@@ -16,20 +17,23 @@ import {ProductService} from '../../../services/product.service';
 export class ProductPageComponent implements OnInit {
   productList: ProductModel[] = [];
 
-  constructor(private productService: ProductService) { }
-  // filteredProducts: ProductModel[]
-  receiveFilter(test: String) {
-    console.log(test);
-    // this.productService.setProducts(filteredProducts);
+  constructor(public productService: ProductService) { }
+
+  receiveFilter(filter: FilterModel) {
+    this.fetchProducts(filter);
   }
 
   ngOnInit() {
-    this.productService.getProductList().then(products => {
+    this.fetchProducts()
+    this.productService.products$.subscribe(products => {if (products) this.productList = products});
+  }
+
+
+  private fetchProducts(filter?: FilterModel) {
+    this.productService.getProductList(filter).then(products => {
       this.productService.setProducts(products.data)
     }).catch(error => {
       console.error(error);
     })
-    this.productService.products$.subscribe(products => {this.productList = products});
   }
-
 }

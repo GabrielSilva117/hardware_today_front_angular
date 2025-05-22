@@ -1,5 +1,6 @@
 <div class="product">
-  <app-product-filter [paginatedProdPayload]="productList" (selectProducts)="receiveFilter($event)"></app-product-filter>
+  <app-product-filter [paginatedProdPayload]="productService.products$" (selectProducts)="receiveFilter($event)"></app-product-filter>
+  <br>
   <app-product-list [filteredProducts]="productList"></app-product-list>
 </div>
 

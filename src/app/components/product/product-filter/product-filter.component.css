@@ -1,0 +1,11 @@
+.filter-body {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 2 fields per row */
+  gap: 1rem; /* space between fields */
+  align-items: end; /* align fields and button nicely */
+}
+
+.filter-body button {
+  grid-column: span 4; /* Make the button take the full width of the row */
+  justify-self: center; /* Center the button horizontally */
+}

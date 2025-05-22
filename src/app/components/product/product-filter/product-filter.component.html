@@ -1,11 +1,15 @@
 <mat-accordion>
   <mat-expansion-panel hideToggle>
     <mat-expansion-panel-header>
-      <mat-panel-title> This is the expansion title </mat-panel-title>
-      <mat-panel-description> This is a summary of the content </mat-panel-description>
+      <mat-panel-title>Filter Expansion</mat-panel-title>
+      <mat-panel-description></mat-panel-description>
     </mat-expansion-panel-header>
-    <app-product-combobox [itemsToList]="brands" [label]="'Brands'" ></app-product-combobox>
-    <app-product-combobox [itemsToList]="categories" [label]="'Categories'" ></app-product-combobox>
-    <button mat-raised-button (click)="sendData()">Filter</button>
+    <div class="filter-body">
+      <app-product-combobox formControlName="brand" [itemsToList]="brands" [label]="'Brands'" [multiple]="true"></app-product-combobox>
+      <app-product-combobox formControlName="category" [itemsToList]="categories" [label]="'Categories'" [multiple]="true"></app-product-combobox>
+      <app-default-field formControlName="minPrice" fieldLabel="From Price"></app-default-field>
+      <app-default-field formControlName="maxPrice" fieldLabel="To"></app-default-field>
+      <button mat-raised-button (click)="sendData()">Filter</button>
+    </div>
   </mat-expansion-panel>
 </mat-accordion>

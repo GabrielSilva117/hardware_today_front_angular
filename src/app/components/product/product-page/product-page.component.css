@@ -1,0 +1,8 @@
+.product {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center;     /* Center horizontally */
+  justify-content: center; /* Center vertically if needed */
+  min-height: 100vh;       /* Full height of the viewport (optional) */
+  text-align: center;      /* Optional: center text inside child elements */
+}
