@@ -31,4 +31,8 @@ export class ProductService {
   getProducts() {
     return this.productSource.getValue();
   }
+
+  getProductById(id: String) {
+    return this.api.get<ProductModel>(`/${id}`);
+  }
 }
