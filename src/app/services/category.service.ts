@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import {environment} from '../../enviroments/enviroment';
-import {CategoryModel} from '../models/product/CategoryModel';
+import {CategoryModel} from '../models/utils/CategoryModel';
 
 @Injectable({
   providedIn: 'root'

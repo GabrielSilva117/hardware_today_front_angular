@@ -1,5 +1,5 @@
-import {BrandModel} from './BrandModel';
-import {CategoryModel} from './CategoryModel';
+import {BrandModel} from '../utils/BrandModel';
+import {CategoryModel} from '../utils/CategoryModel';
 
 export interface ProductModel {
   id: string;
