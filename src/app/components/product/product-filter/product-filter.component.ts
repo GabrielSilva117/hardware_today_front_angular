@@ -8,8 +8,8 @@ import {
 import {MatButton} from '@angular/material/button';
 import {ProductComboboxComponent} from './product-combobox/product-combobox.component';
 import {ProductModel} from '../../../models/product/ProductModel';
-import {BrandModel} from '../../../models/product/BrandModel';
-import {CategoryModel} from '../../../models/product/CategoryModel';
+import {BrandModel} from '../../../models/utils/BrandModel';
+import {CategoryModel} from '../../../models/utils/CategoryModel';
 import {Observable} from 'rxjs';
 import {BrandService} from '../../../services/brand.service';
 import {CategoryService} from '../../../services/category.service';
