@@ -4,6 +4,7 @@ import {NgForOf} from '@angular/common';
 import {Router} from '@angular/router';
 import {MatMiniFabButton} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {CartService} from '../../../services/cart.service';
 
 @Component({
   selector: 'app-product-list',
@@ -18,13 +19,13 @@ import {MatIconModule} from '@angular/material/icon';
 export class ProductListComponent {
   @Input() filteredProducts: ProductModel[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private cartService: CartService) {}
 
   openProductPage(productId: string) {
     this.router.navigate([`/product/${productId}`]);
   }
 
-  addProductToCart(event: Event) {
-    event.stopPropagation();
+  addProductToCart(event: Event, productId: string) {
+    console.log(this.cartService.addProductToCart(productId))
   }
 }

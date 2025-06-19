@@ -1,9 +1,10 @@
 <div>
   <ul class="product-grid">
-    <li *ngFor="let prod of filteredProducts" (click)="openProductPage(prod.id)">
+<!--    (click)="openProductPage(prod.id)"-->
+    <li *ngFor="let prod of filteredProducts">
       <p>{{prod.name}}</p>
       <p>R${{prod.price}}</p>
-      <button mat-mini-fab (click)="addProductToCart($event)" class="add-to-cart-btn"><mat-icon class="cart-icon">shopping_cart</mat-icon></button>
+      <button mat-mini-fab (click)="addProductToCart($event, prod.id)" class="add-to-cart-btn"><mat-icon class="cart-icon">shopping_cart</mat-icon></button>
     </li>
   </ul>
 </div>
