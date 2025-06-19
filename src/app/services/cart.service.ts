@@ -19,4 +19,15 @@ export class CartService {
     return this.api.get('/user');
   }
 
+  addProductToCart(productId: string) {
+    return this.api.post<String>(`/add/${productId}`)
+  }
+
+  removeProductFromCart(productId: string) {
+    return this.api.delete<String>(`/product/${productId}`);
+  }
+
+  deleteActiveCart() {
+    return this.api.delete(`/`);
+  }
 }
