@@ -3,6 +3,9 @@
   <small>{{ product.category.name }}</small>
   <br>
   <small>R$ {{product.price}}</small>
+  <p *ngIf="isActiveCart">
+    <button mat-button="filled" (click)="removeProductFromCart(product.id)">
+      Remove product
+    </button>
+  </p>
 </div>
-
-<p><b>R$ {{ cart.totalPrice }}</b></p>

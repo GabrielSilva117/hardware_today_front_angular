@@ -1,3 +1,17 @@
-<div>
-
+<div *ngIf="cart">
+  <app-cart-container [cart]="cart" [isActiveCart]="true"></app-cart-container>
+  <p>Total: <b>R$ {{ cart.totalPrice }}</b></p>
+  <div>
+    <button mat-button="filled">
+      Proceed
+    </button>
+    <button mat-button="filled" (click)="deleteActiveCart()">
+      Delete
+    </button>
+    <button mat-button="filled">
+      Inactivate
+    </button>
+  </div>
 </div>
+
+<p *ngIf="!cart">There's no active cart! Browse the gallery and add products to generate a cart</p>

@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {CartService} from '../../../services/cart.service';
-import {CartContainerComponent} from '../cart-container/cart-container.component';
 import {CartModel} from '../../../models/cart/CartModel';
+import {CartDetailComponent} from '../cart-detail/cart-detail.component';
 @Component({
   selector: 'app-cart-page',
   imports: [
-    CartContainerComponent
+    CartDetailComponent
   ],
   templateUrl: './cart-page.component.html',
   styleUrl: './cart-page.component.css'
