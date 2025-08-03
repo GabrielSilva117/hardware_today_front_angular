@@ -1,10 +1,15 @@
-<div *ngFor="let product of cart.products" class="mt-3 mb-3">
-  <p><b>{{product.name}}</b></p>
-  <small>{{ product.category.name }}</small>
+<div *ngFor="let item of cart.items" class="mt-3 mb-3">
+  <p><b>{{item.product.name}}</b></p>
+  <small>{{ item.product.category.name }}</small>
+  <div>
+    <button mat-button="filled" (click)="removeProductFromCart(item.product.id, 1)">-</button>
+    <small>{{ item.quantity }}</small>
+    <button mat-button="filled" (click)="addProductToCart(item.product.id, 1)">+</button>
+  </div>
   <br>
-  <small>R$ {{product.price}}</small>
+  <small>R$ {{item.product.price}}</small>
   <p *ngIf="isActiveCart">
-    <button mat-button="filled" (click)="removeProductFromCart(product.id)">
+    <button mat-button="filled" (click)="removeProductFromCart(item.product.id)">
       Remove product
     </button>
   </p>

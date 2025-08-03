@@ -21,8 +21,22 @@ export class CartContainerComponent {
 
   constructor(private cartService: CartService, private router: Router) {}
 
-  removeProductFromCart(productId: string) {
-    this.cartService.removeProductFromCart(productId).then(response => console.log(response.data));
+  private refreshRoute() {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([this.router.url]);
+    });
+  }
+
+  deleteActiveCart() {
+    this.cartService.deleteActiveCart().then(response => console.log(response.data));
+  }
+
+  removeProductFromCart(productId: string, quantity?: number) {
+    this.cartService.removeProductFromCart(productId, quantity).then(response => console.log(response.data));
+    window.location.reload();
+  }
+
+  addProductToCart(productId: string, quantity?: number) {
     window.location.reload();
   }
 

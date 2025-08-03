@@ -23,8 +23,8 @@ export class CartService {
     return this.api.post<String>(`/add/${productId}`)
   }
 
-  removeProductFromCart(productId: string) {
-    return this.api.delete<String>(`/product/${productId}`);
+  removeProductFromCart(productId: string, quantity?: number) {
+    return this.api.delete<String>(`/product/${productId}` + (quantity && `/${quantity}` || ''));
   }
 
   deleteActiveCart() {

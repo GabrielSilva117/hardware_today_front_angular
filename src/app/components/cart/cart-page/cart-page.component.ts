@@ -21,6 +21,9 @@ export class CartPageComponent implements OnInit {
   }
 
   private getAllCarts() {
-    this.cartService.getAllCartsFromUser().then(response => this.cartList = response.data[0]);
+    this.cartService.getAllCartsFromUser().then(response => {
+      this.cartList = response.data[0]
+    });
+
   }
 }

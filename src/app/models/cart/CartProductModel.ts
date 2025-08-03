@@ -3,5 +3,6 @@ export interface CartProductModel {
   id: string;
   name: string;
   price: number;
+  quantity: number;
   category: CategoryModel;
 }

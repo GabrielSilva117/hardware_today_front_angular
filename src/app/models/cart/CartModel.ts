@@ -1,8 +1,8 @@
-import {CartProductModel} from './CartProductModel';
+import {CartItemModel} from './CartItemModel';
 
 export interface CartModel {
   id: String;
   enabled: boolean;
-  products: CartProductModel[];
+  items: CartItemModel[];
   totalPrice: number;
 }
