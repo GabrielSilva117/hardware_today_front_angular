@@ -1,0 +1,11 @@
+<div>
+  <h2 mat-dialog-title>{{ data.title }}</h2>
+  <mat-dialog-content>
+    <p>{{ data.contentText }}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button *ngIf="!data.isCancelHidden" (click)="onCancelClick()" mat-button mat-dialog-close>{{ data.cancelText }}</button>
+    <button *ngIf="data.thirdButtonText" (click)="onThirdClick()" mat-button color="primary" [mat-dialog-close]="true">{{ data.thirdButtonText }}</button>
+    <button *ngIf="!data.isConfirmHidden" (click)="onConfirmClick()" mat-button color="primary" [mat-dialog-close]="true">{{ data.confirmText }}</button>
+  </mat-dialog-actions>
+</div>
