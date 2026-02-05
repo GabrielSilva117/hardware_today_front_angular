@@ -1,0 +1,8 @@
+<div class="cart-items">
+  <div class="cart-item" *ngFor="let item of cart">
+    {{ item.name }}
+    <button mat-button="filled" (click)="activateCart(item.id)">
+      Activate
+    </button>
+  </div>
+</div>

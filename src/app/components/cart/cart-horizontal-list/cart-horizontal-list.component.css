@@ -1,0 +1,11 @@
+.cart-items {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.cart-item {
+  background: #f4f4f4;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}
