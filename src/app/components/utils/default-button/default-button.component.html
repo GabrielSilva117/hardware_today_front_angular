@@ -1,0 +1,95 @@
+<!-- Basic Button -->
+<button
+  *ngIf="variant === 'basic'"
+  mat-button
+  [type]="type"
+  [color]="color"
+  [disabled]="disabled || loading"
+  [class.full-width]="fullWidth"
+  (click)="onClick()">
+  <mat-icon *ngIf="icon && iconPosition === 'before' && !loading">{{ icon }}</mat-icon>
+  <mat-spinner *ngIf="loading" diameter="20" class="button-spinner"></mat-spinner>
+  <span>{{ label }}</span>
+  <mat-icon *ngIf="icon && iconPosition === 'after' && !loading">{{ icon }}</mat-icon>
+</button>
+
+<!-- Raised Button -->
+<button
+  *ngIf="variant === 'raised'"
+  mat-raised-button
+  [type]="type"
+  [color]="color"
+  [disabled]="disabled || loading"
+  [class.full-width]="fullWidth"
+  (click)="onClick()">
+  <mat-icon *ngIf="icon && iconPosition === 'before' && !loading">{{ icon }}</mat-icon>
+  <mat-spinner *ngIf="loading" diameter="20" class="button-spinner"></mat-spinner>
+  <span>{{ label }}</span>
+  <mat-icon *ngIf="icon && iconPosition === 'after' && !loading">{{ icon }}</mat-icon>
+</button>
+
+<!-- Stroked Button -->
+<button
+  *ngIf="variant === 'stroked'"
+  mat-stroked-button
+  [type]="type"
+  [color]="color"
+  [disabled]="disabled || loading"
+  [class.full-width]="fullWidth"
+  (click)="onClick()">
+  <mat-icon *ngIf="icon && iconPosition === 'before' && !loading">{{ icon }}</mat-icon>
+  <mat-spinner *ngIf="loading" diameter="20" class="button-spinner"></mat-spinner>
+  <span>{{ label }}</span>
+  <mat-icon *ngIf="icon && iconPosition === 'after' && !loading">{{ icon }}</mat-icon>
+</button>
+
+<!-- Flat Button -->
+<button
+  *ngIf="variant === 'flat'"
+  mat-flat-button
+  [type]="type"
+  [color]="color"
+  [disabled]="disabled || loading"
+  [class.full-width]="fullWidth"
+  (click)="onClick()">
+  <mat-icon *ngIf="icon && iconPosition === 'before' && !loading">{{ icon }}</mat-icon>
+  <mat-spinner *ngIf="loading" diameter="20" class="button-spinner"></mat-spinner>
+  <span>{{ label }}</span>
+  <mat-icon *ngIf="icon && iconPosition === 'after' && !loading">{{ icon }}</mat-icon>
+</button>
+
+<!-- Icon Button -->
+<button
+  *ngIf="variant === 'icon'"
+  mat-icon-button
+  [type]="type"
+  [color]="color"
+  [disabled]="disabled || loading"
+  (click)="onClick()">
+  <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+  <mat-icon *ngIf="!loading">{{ icon || 'favorite' }}</mat-icon>
+</button>
+
+<!-- FAB Button -->
+<button
+  *ngIf="variant === 'fab'"
+  mat-fab
+  [type]="type"
+  [color]="color"
+  [disabled]="disabled || loading"
+  (click)="onClick()">
+  <mat-spinner *ngIf="loading" diameter="24"></mat-spinner>
+  <mat-icon *ngIf="!loading">{{ icon || 'add' }}</mat-icon>
+</button>
+
+<!-- Mini FAB Button -->
+<button
+  *ngIf="variant === 'mini-fab'"
+  mat-mini-fab
+  [type]="type"
+  [color]="color"
+  [disabled]="disabled || loading"
+  (click)="onClick()">
+  <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+  <mat-icon *ngIf="!loading">{{ icon || 'add' }}</mat-icon>
+</button>
