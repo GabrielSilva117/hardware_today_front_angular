@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios, {AxiosInstance} from 'axios';
 import {environment} from '../../enviroments/enviroment';
+import CartStateActionInput from '../models/cart/CartStateActionInput';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,18 @@ export class CartService {
 
   removeProductFromCart(productId: string, quantity?: number) {
     return this.api.delete<String>(`/product/${productId}` + (quantity && `/${quantity}` || ''));
+  }
+
+  changeCartState(cartId: string) {
+    return this.api.post<String>(`/toggle-state/${cartId}`);
+  }
+
+  finishPurchase() {
+    return this.api.get('/test');
+  }
+
+  runCartStateAction(stateActionInput: CartStateActionInput) {
+    return this.api.post<String>(`/state-action`, stateActionInput);
   }
 
   deleteActiveCart() {
