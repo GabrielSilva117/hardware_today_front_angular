@@ -39,5 +39,4 @@ export class CartContainerComponent {
   addProductToCart(productId: string, quantity?: number) {
     window.location.reload();
   }
-
 }
