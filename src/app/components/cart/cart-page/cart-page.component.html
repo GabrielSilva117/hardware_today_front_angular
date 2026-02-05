@@ -1,3 +1,6 @@
 <div class="cart-page">
-  <app-cart-detail [cart]="cartList" ></app-cart-detail>
+
+  <app-cart-detail *ngIf="state==='cart_detail'" (emitter)="onStateChange($event)" [cart]="activeCart" ></app-cart-detail>
+  <app-cart-horizontal-list *ngIf="state==='cart_detail'" [cart]="cartList"></app-cart-horizontal-list>
+  <app-cart-checkout *ngIf="state==='checkout'" ></app-cart-checkout>
 </div>
