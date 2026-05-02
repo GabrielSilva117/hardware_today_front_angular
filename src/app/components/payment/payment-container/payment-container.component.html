@@ -1,0 +1,7 @@
+<div class="payment-container">
+  <app-payment-info *ngIf="state=='ongoing'" (paymentSubmit)="onPaymentSubmit($event)"></app-payment-info>
+  <app-payment-status
+    *ngIf="state === 'processing_payment' || state === 'payment_success' || state === 'payment_error'"
+    [phase]="paymentStatusPhase"
+  ></app-payment-status>
+</div>

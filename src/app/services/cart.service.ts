@@ -16,6 +16,10 @@ export class CartService {
     })
   }
 
+  getCartId() {
+    return this.api.get('/');
+  }
+
   getAllCartsFromUser() {
     return this.api.get('/user');
   }
@@ -30,10 +34,6 @@ export class CartService {
 
   changeCartState(cartId: string) {
     return this.api.post<String>(`/toggle-state/${cartId}`);
-  }
-
-  finishPurchase() {
-    return this.api.get('/test');
   }
 
   runCartStateAction(stateActionInput: CartStateActionInput) {
