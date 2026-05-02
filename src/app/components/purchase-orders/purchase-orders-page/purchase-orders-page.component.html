@@ -1,0 +1,45 @@
+<div class="orders-page container py-4">
+  <h1 class="h3 mb-4">My purchase orders</h1>
+
+  <p *ngIf="loading" class="text-muted">Loading…</p>
+  <p *ngIf="!loading && error" class="text-danger">{{ error }}</p>
+
+  <p *ngIf="!loading && !error && orders.length === 0" class="text-muted">
+    You have no orders yet. After a successful payment, your items will appear here.
+  </p>
+
+  <div *ngFor="let order of orders" class="card mb-4 shadow-sm">
+    <div class="card-header d-flex flex-column gap-1">
+      <span class="fw-semibold">{{ order.placedAt | date: 'medium' }}</span>
+      <span class="text-muted small text-break">Reference: {{ order.id }}</span>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-sm table-borderless mb-0">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th class="text-end">Price</th>
+              <th class="text-end">Qty</th>
+              <th class="text-end">Line total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of order.items">
+              <td>{{ item.productName }}</td>
+              <td class="text-end">{{ item.unitPrice | number: '1.2-2' }}</td>
+              <td class="text-end">{{ item.quantity }}</td>
+              <td class="text-end">{{ item.lineTotal | number: '1.2-2' }}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3" class="text-end fw-semibold">Total</td>
+              <td class="text-end fw-semibold">{{ order.totalAmount | number: '1.2-2' }}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
