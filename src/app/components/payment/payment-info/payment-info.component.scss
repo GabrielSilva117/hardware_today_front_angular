@@ -1,0 +1,308 @@
+$bg: #111113;
+$surface: #1a1a1f;
+$surface2: #222228;
+$border: rgba(255, 255, 255, 0.08);
+$border2: rgba(255, 255, 255, 0.14);
+$text: #f0f0f0;
+$muted: #888;
+$accent: #4f8ef7;
+$radius: 12px;
+
+// ── Left panel (form area) ──────────────────────────────
+.payment-info {
+  padding: 2rem;
+  border-right: 0.5px solid $border;
+}
+
+// ── Method tabs ─────────────────────────────────────────
+.method-tabs {
+  display: flex;
+  gap: 6px;
+  background: $surface2;
+  border-radius: 10px;
+  padding: 4px;
+  margin-bottom: 2rem;
+
+  button {
+    flex: 1;
+    padding: 8px 6px;
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    background: transparent;
+    color: $muted;
+    transition: background 0.2s, color 0.2s;
+
+    &.active {
+      background: $accent;
+      color: #fff;
+    }
+
+    &:hover:not(.active) {
+      color: $text;
+    }
+  }
+}
+
+// ── Panels ───────────────────────────────────────────────
+.method-panel {
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+// ── Form fields ──────────────────────────────────────────
+.field {
+  margin-bottom: 16px;
+
+  label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: $muted;
+    letter-spacing: 0.03em;
+    margin-bottom: 6px;
+  }
+
+  input {
+    width: 100%;
+    background: $surface2;
+    border: 0.5px solid $border2;
+    border-radius: 8px;
+    padding: 11px 14px;
+    color: $text;
+    font-size: 14px;
+    font-family: 'DM Mono', monospace;
+    outline: none;
+    transition: border-color 0.2s;
+
+    &::placeholder {
+      color: darken($muted, 10%);
+    }
+
+    &:focus {
+      border-color: $accent;
+      box-shadow: 0 0 0 3px rgba($accent, 0.12);
+    }
+  }
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+// ── PIX panel ────────────────────────────────────────────
+.pix-panel {
+  text-align: center;
+  padding: 1.5rem 0;
+
+  .qr-placeholder {
+    width: 140px;
+    height: 140px;
+    background: $surface2;
+    border: 0.5px solid $border2;
+    border-radius: 10px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: $muted;
+  }
+
+  .hint {
+    font-size: 13px;
+    color: $muted;
+    line-height: 1.6;
+  }
+
+  .pix-key-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 1rem;
+    background: $surface2;
+    border: 0.5px solid $border2;
+    border-radius: 8px;
+    padding: 10px 12px;
+
+    span {
+      flex: 1;
+      font-size: 12px;
+      color: $muted;
+      font-family: 'DM Mono', monospace;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    button {
+      font-size: 11px;
+      font-weight: 500;
+      color: $accent;
+      background: none;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+  }
+}
+
+// ── Boleto panel ─────────────────────────────────────────
+.boleto-info {
+  background: $surface2;
+  border: 0.5px solid $border2;
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  font-size: 13px;
+  color: $muted;
+  line-height: 1.7;
+}
+
+// ── PayPal panel ─────────────────────────────────────────
+.paypal-panel {
+  text-align: center;
+  padding: 2rem 0;
+
+  p {
+    font-size: 13px;
+    color: $muted;
+    line-height: 1.6;
+  }
+}
+
+// ── Order summary (right panel) ───────────────────────────
+.order-summary {
+  padding: 2rem;
+  background: $surface2;
+
+  .summary-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: $muted;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+
+  .item-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+  }
+
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+
+    .item-thumb {
+      width: 36px;
+      height: 36px;
+      background: $surface;
+      border: 0.5px solid $border2;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .item-name {
+      font-size: 13px;
+      color: $text;
+      font-weight: 500;
+    }
+
+    .item-qty {
+      font-size: 11px;
+      color: $muted;
+    }
+
+    .item-price {
+      font-size: 13px;
+      color: $text;
+      white-space: nowrap;
+    }
+  }
+
+  .divider {
+    border: none;
+    border-top: 0.5px solid $border;
+    margin: 0 0 14px;
+  }
+
+  .line-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+
+    span:first-child { font-size: 13px; color: $muted; }
+    span:last-child  { font-size: 13px; color: $text; }
+  }
+
+  .total-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.75rem;
+
+    span {
+      font-size: 15px;
+      font-weight: 600;
+      color: $text;
+    }
+  }
+
+  .pay-btn {
+    width: 100%;
+    padding: 13px;
+    background: $accent;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: opacity 0.2s, transform 0.1s;
+
+    &:hover  { opacity: 0.9; }
+    &:active { transform: scale(0.98); }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .security-note {
+    font-size: 11px;
+    color: $muted;
+    text-align: center;
+    margin-top: 12px;
+    line-height: 1.6;
+  }
+}
+
+// ── Responsive ────────────────────────────────────────────
+@media (max-width: 640px) {
+  .payment-container {
+    grid-template-columns: 1fr;
+  }
+
+  .order-summary {
+    border-top: 0.5px solid $border;
+    border-right: none;
+  }
+}

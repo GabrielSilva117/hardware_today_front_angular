@@ -1,0 +1,59 @@
+<div class="payment-info">
+
+  <!-- Method tabs -->
+  <div class="method-tabs">
+    <button
+      *ngFor="let method of methods"
+      [class.active]="selectedMethod === method"
+      (click)="selectedMethod = method">
+      {{ method }}
+    </button>
+  </div>
+
+  <!-- Card form -->
+  <div class="method-panel" *ngIf="selectedMethod === 'CARD'">
+    <div class="field">
+      <label>Card number</label>
+      <input [(ngModel)]="card.number" placeholder="1234 5678 9012 3456" maxlength="19" />
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Expiration</label>
+        <input [(ngModel)]="card.expirationDate" placeholder="MM/YY" maxlength="5" />
+      </div>
+      <div class="field">
+        <label>CVV</label>
+        <input [(ngModel)]="card.cvv" placeholder="•••" type="password" maxlength="4" />
+      </div>
+    </div>
+    <div class="field">
+      <label>Cardholder name</label>
+      <input [(ngModel)]="card.cardHolderName" placeholder="Name on card" />
+    </div>
+  </div>
+
+  <!-- PIX panel -->
+  <div class="method-panel pix-panel" *ngIf="selectedMethod === 'pix'">
+    <div class="qr-placeholder">QR Code here</div>
+    <p class="hint">Scan with your banking app or copy the PIX key</p>
+  </div>
+
+  <!-- Boleto panel -->
+  <div class="method-panel" *ngIf="selectedMethod === 'boleto'">
+    <div class="boleto-info">Due within 3 business days</div>
+    <div class="field">
+      <label>CPF / CNPJ</label>
+      <input [(ngModel)]="cpf" placeholder="000.000.000-00" />
+    </div>
+  </div>
+
+  <!-- PayPal panel -->
+  <div class="method-panel paypal-panel" *ngIf="selectedMethod === 'paypal'">
+    <p>You'll be redirected to PayPal to complete payment.</p>
+  </div>
+
+
+  <div id="trigger-payment">
+    <app-default-button [fullWidth]="true" label="Procceed with purchase" variant="raised" color="primary" (clicked)="onSubmit()"></app-default-button>
+  </div>
+</div>

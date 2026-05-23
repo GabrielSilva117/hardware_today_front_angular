@@ -35,6 +35,10 @@ export class NavBarComponent implements OnInit {
         route: '/gallery',
       },
       {
+        title: 'My orders',
+        route: '/orders',
+      },
+      {
         title: 'My profile',
         route: '/profile',
       },
