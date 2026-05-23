@@ -8,7 +8,10 @@ import {
 } from '@angular/material/dialog';
 import {MatButton} from '@angular/material/button';
 import {DefaultDialogData} from '../../../models/utils/DefaultDialogData';
-import {NgIf} from '@angular/common';
+import {NgFor, NgIf} from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-default-dialog',
@@ -18,21 +21,40 @@ import {NgIf} from '@angular/common';
     MatDialogContent,
     MatDialogTitle,
     MatButton,
-    NgIf
+    NgIf,
+    NgFor,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   templateUrl: './default-dialog.component.html',
   styleUrl: './default-dialog.component.css'
 })
 export class DefaultDialogComponent {
-  // @Input() title: string = 'Dialog Title';
-  // @Input() contentText: string = 'Dialog Message'
-  // @Input() cancelText: string = 'Cancel';
-  // @Input() confirmText: string = 'Confirm';
-  // @Input() isCancelHidden: boolean = false;
-  // @Input() isConfirmHidden: boolean = false;
+
+  form: FormGroup;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: DefaultDialogData,
-              private dialogRef: MatDialogRef<DefaultDialogComponent>) {
+              private dialogRef: MatDialogRef<DefaultDialogComponent>,
+              private fb: FormBuilder
+            ) {
+              this.form = this.buildForm()
+  }
+
+  private buildForm(): FormGroup {
+    const controls: Record<string, any> = {};
+
+    for (const field of this.data.formFields ?? []) {
+      const validators = field.validators ?? [];
+      if (field.required) validators.push(Validators.required);
+      controls[field.key] = [null, validators];
+    }
+
+    return this.fb.group(controls);
+  }
+
+  get hasFields(): boolean {
+    return (this.data.formFields?.length ?? 0) > 0;
   }
 
   onCancelClick(): void {
@@ -41,7 +63,13 @@ export class DefaultDialogComponent {
   }
 
   onConfirmClick(): void {
-    this.data.onConfirm?.();
+    if (this.hasFields && this.form.invalid) {
+      this.form.markAllAsTouched(); // triggers validation messages
+      return;
+    }
+
+    // passes form values only if there are fields, otherwise undefined
+    this.data.onConfirm?.(this.hasFields ? this.form.value : undefined);
     this.dialogRef.close('confirm');
   }
 
