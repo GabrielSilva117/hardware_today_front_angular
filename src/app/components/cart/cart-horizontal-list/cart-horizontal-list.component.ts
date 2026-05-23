@@ -21,7 +21,7 @@ export class CartHorizontalListComponent {
   constructor(private cartService: CartService, private dialog: MatDialog) {}
 
   openConfirmDialog(id: string) {
-    const dialogRef = this.dialog.open(DefaultDialogComponent, {
+    this.dialog.open(DefaultDialogComponent, {
       width: '350px',
       data: {
         title: "Cart conflict!",
@@ -34,29 +34,20 @@ export class CartHorizontalListComponent {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) this.proceedWithCart();
-    });
   }
 
   runCartStateAction(id: string, shouldMerge: boolean) : void {
     this.cartService.runCartStateAction({cartToChange: id, shouldMerge: shouldMerge}).then(r => console.log(r.data));
-    // window.location.reload();
-  }
-
-  proceedWithCart() : void {
-
+    window.location.reload();
   }
 
   activateCart(id: string) {
-    console.log(this.cart);
-    console.log(id);
     this.cartService.changeCartState(id).then(response => {
-      console.log(response.data)
       if (response.data.toString() == "false") {
         this.openConfirmDialog(id);
+        return;
       }
+      window.location.reload();
     });
-    // window.location.reload();
   }
 }

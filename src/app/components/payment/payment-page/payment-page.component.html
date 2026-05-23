@@ -1,7 +1,5 @@
-<app-default-button
-  label="Go back"
-  variant="raised"
-  color="primary"
-  (clicked)="onGoBack()"
-></app-default-button>
-<p>payment-page works!</p>
+<div class="payment-page">
+  <app-default-button label="Go back" variant="raised" color="primary" (clicked)="onGoBack()">
+  </app-default-button>
+  <app-payment-container></app-payment-container>
+</div>
