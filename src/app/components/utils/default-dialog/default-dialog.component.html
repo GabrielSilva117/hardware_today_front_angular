@@ -2,6 +2,36 @@
   <h2 mat-dialog-title>{{ data.title }}</h2>
   <mat-dialog-content>
     <p>{{ data.contentText }}</p>
+    <form *ngIf="hasFields" [formGroup]="form">
+      <mat-form-field
+        *ngFor="let field of data.formFields"
+        appearance="outline"
+        style="width: 100%; margin-top: 8px;"
+      >
+        <mat-label>{{ field.label }}</mat-label>
+
+        <textarea
+          *ngIf="field.type === 'textarea'; else defaultInput"
+          matInput
+          [formControlName]="field.key"
+          [placeholder]="field.placeholder ?? ''"
+          rows="3"
+        ></textarea>
+
+        <ng-template #defaultInput>
+          <input
+            matInput
+            [type]="field.type ?? 'text'"
+            [formControlName]="field.key"
+            [placeholder]="field.placeholder ?? ''"
+          />
+        </ng-template>
+
+        <mat-error *ngIf="form.get(field.key)?.hasError('required')">
+          {{ field.label }} is required
+        </mat-error>
+      </mat-form-field>
+    </form>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button *ngIf="!data.isCancelHidden" (click)="onCancelClick()" mat-button mat-dialog-close>{{ data.cancelText }}</button>

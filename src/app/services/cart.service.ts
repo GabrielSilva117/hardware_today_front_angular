@@ -32,12 +32,18 @@ export class CartService {
     return this.api.delete<String>(`/product/${productId}` + (quantity && `/${quantity}` || ''));
   }
 
-  changeCartState(cartId: string) {
-    return this.api.post<String>(`/toggle-state/${cartId}`);
+  changeCartState(cartId: string, dto?: CartStateChangeModel) {
+    if (!dto) {
+      dto = {
+        cartName: ''
+      };
+    }
+    
+    return this.api.post<string>(`toggle-state/${cartId}`, dto);
   }
 
   runCartStateAction(stateActionInput: CartStateActionInput) {
-    return this.api.post<String>(`/state-action`, stateActionInput);
+    return this.api.post<string>(`state-action`, stateActionInput);
   }
 
   deleteActiveCart() {
