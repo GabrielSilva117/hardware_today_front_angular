@@ -61,9 +61,14 @@ export class PaymentContainerComponent implements OnDestroy {
         this.state = success ? 'payment_success' : 'payment_error';
         if (success) {
           this.sub?.unsubscribe();
+          const purchaseOrderId = payload?.purchaseOrderId as string | undefined;
           this.redirectTimer = setTimeout(() => {
             this.redirectTimer = undefined;
-            void this.router.navigate(['/gallery']);
+            if (purchaseOrderId) {
+              void this.router.navigate(['/orders', purchaseOrderId]);
+            } else {
+              void this.router.navigate(['/orders']);
+            }
           }, 3000);
         }
       },
