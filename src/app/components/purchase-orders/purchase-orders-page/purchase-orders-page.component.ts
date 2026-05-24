@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe, DecimalPipe, NgForOf, NgIf } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { PurchaseOrderService } from '../../../services/purchase-order.service';
 import { PurchaseOrderModel } from '../../../models/purchase-order/PurchaseOrderModel';
 
 @Component({
   selector: 'app-purchase-orders-page',
-  imports: [NgIf, NgForOf, DatePipe, DecimalPipe],
+  imports: [NgIf, NgForOf, DatePipe, DecimalPipe, RouterLink],
   templateUrl: './purchase-orders-page.component.html',
   styleUrl: './purchase-orders-page.component.css'
 })
