@@ -23,6 +23,6 @@ export class PurchaseOrderService {
   }
 
   getOrder(id: string) {
-    return this.api.get<PurchaseOrderModel>(`/${id}`);
+    return this.api.get<PurchaseOrderModel>(`${id}`);
   }
 }
