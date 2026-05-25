@@ -21,10 +21,9 @@ export class CartContainerComponent {
 
   constructor(private cartService: CartService, private router: Router) {}
 
-  private refreshRoute() {
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([this.router.url]);
-    });
+  /** Go to the cart route and full-reload so `CartPageComponent` refetches carts from the API. */
+  private refreshRoute(): void {
+    void this.router.navigate(['/cart']).then(() => window.location.reload());
   }
 
   deleteActiveCart() {
@@ -32,11 +31,17 @@ export class CartContainerComponent {
   }
 
   removeProductFromCart(productId: string, quantity?: number) {
-    this.cartService.removeProductFromCart(productId, quantity).then(response => console.log(response.data));
-    window.location.reload();
+    const qty = quantity ?? 1;
+    this.cartService
+      .removeProductFromCart(productId, qty)
+      .then(() => this.refreshRoute())
+      .catch((err) => console.error(err));
   }
 
-  addProductToCart(productId: string, quantity?: number) {
-    window.location.reload();
+  addProductToCart(productId: string, _quantity?: number) {
+    this.cartService
+      .addProductToCart(productId)
+      .then(() => this.refreshRoute())
+      .catch((err) => console.error(err));
   }
 }

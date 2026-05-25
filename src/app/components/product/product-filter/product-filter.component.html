@@ -4,7 +4,7 @@
       <mat-panel-title>Filter Expansion</mat-panel-title>
       <mat-panel-description></mat-panel-description>
     </mat-expansion-panel-header>
-    <div class="filter-body">
+    <div class="filter-body" [formGroup]="myForm">
       <app-product-combobox formControlName="brand" [itemsToList]="brands" [label]="'Brands'" [multiple]="true"></app-product-combobox>
       <app-product-combobox formControlName="category" [itemsToList]="categories" [label]="'Categories'" [multiple]="true"></app-product-combobox>
       <app-default-field formControlName="minPrice" fieldLabel="From Price"></app-default-field>

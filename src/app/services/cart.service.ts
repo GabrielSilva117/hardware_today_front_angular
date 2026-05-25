@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import axios, {AxiosInstance} from 'axios';
 import {environment} from '../../enviroments/enviroment';
 import CartStateActionInput from '../models/cart/CartStateActionInput';
+import CartStateChangeModel from '../models/cart/CartStateChangeModel';
 
 @Injectable({
   providedIn: 'root'
@@ -17,19 +18,24 @@ export class CartService {
   }
 
   getCartId() {
-    return this.api.get('/');
+    // '' avoids axios turning this into /cart/ (trailing slash); Spring may not match that.
+    return this.api.get('');
   }
 
   getAllCartsFromUser() {
-    return this.api.get('/user');
+    return this.api.get('user');
   }
 
   addProductToCart(productId: string) {
-    return this.api.post<String>(`/add/${productId}`)
+    return this.api.post<string>(`add/${productId}`);
   }
 
-  removeProductFromCart(productId: string, quantity?: number) {
-    return this.api.delete<String>(`/product/${productId}` + (quantity && `/${quantity}` || ''));
+  /**
+   * Backend requires DELETE /cart/product/{productId}/{quantity}.
+   * Quantity must always be sent (1 to decrement one; use line quantity to remove the whole line).
+   */
+  removeProductFromCart(productId: string, quantity: number = 1) {
+    return this.api.delete<string>(`product/${productId}/${quantity}`);
   }
 
   changeCartState(cartId: string, dto?: CartStateChangeModel) {
@@ -47,6 +53,6 @@ export class CartService {
   }
 
   deleteActiveCart() {
-    return this.api.delete(`/`);
+    return this.api.delete('');
   }
 }

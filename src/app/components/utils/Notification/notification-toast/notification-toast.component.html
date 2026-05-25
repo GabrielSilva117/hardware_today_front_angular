@@ -1,0 +1,22 @@
+<div class="toast" [ngClass]="'toast--' + notification().type" role="alert">
+    <div class="toast__icon">
+      <span [innerHTML]="icon()"></span>
+    </div>
+    <div class="toast__body">
+      <p *ngIf="notification().title" class="toast__title">{{ notification().title }}</p>
+      <p class="toast__message">{{ notification().message }}</p>
+      <button
+        *ngIf="notification().action"
+        class="toast__action"
+        (click)="notification().action!.callback()">
+        {{ notification().action!.label }}
+      </button>
+    </div>
+    <button
+      *ngIf="notification().dismissible"
+      class="toast__close"
+      (click)="dismissed.emit(notification().id)"
+      aria-label="Dismiss">
+      ✕
+    </button>
+  </div>

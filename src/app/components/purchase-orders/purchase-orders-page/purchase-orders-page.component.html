@@ -9,9 +9,12 @@
   </p>
 
   <div *ngFor="let order of orders" class="card mb-4 shadow-sm">
-    <div class="card-header d-flex flex-column gap-1">
-      <span class="fw-semibold">{{ order.placedAt | date: 'medium' }}</span>
-      <span class="text-muted small text-break">Reference: {{ order.id }}</span>
+    <div class="card-header d-flex flex-column flex-md-row gap-2 justify-content-md-between align-items-md-start">
+      <div class="d-flex flex-column gap-1">
+        <span class="fw-semibold">{{ order.placedAt | date: 'medium' }}</span>
+        <span class="text-muted small text-break">Reference: {{ order.id }}</span>
+      </div>
+      <a class="btn btn-sm btn-outline-primary align-self-start" [routerLink]="['/orders', order.id]">View details</a>
     </div>
     <div class="card-body">
       <div class="table-responsive">
