@@ -1,0 +1,15 @@
+.notification-container {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 380px;
+    pointer-events: none; /* lets clicks pass through the empty space */
+  }
+
+  app-notification-toast {
+    pointer-events: all; /* but toasts themselves are still clickable */
+  }
