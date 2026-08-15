@@ -26,8 +26,8 @@ export class CartService {
     return this.api.get('user');
   }
 
-  addProductToCart(productId: string) {
-    return this.api.post<string>(`add/${productId}`);
+  addProductToCart(productId: string, quantity : number = 1) {
+    return this.api.post<string>(`add/${productId}/${quantity}`);
   }
 
   /**
@@ -44,7 +44,7 @@ export class CartService {
         cartName: ''
       };
     }
-    
+
     return this.api.post<string>(`toggle-state/${cartId}`, dto);
   }
 

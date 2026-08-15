@@ -21,6 +21,14 @@
           <a class="nav-link active" routerLink="/login" routerLinkActive="active" (click)="logout()" *ngIf="isAuthenticated" >Logo'ut</a>
         </li>
       </ul>
+      <div class="ms-auto" *ngIf="showSearch">
+        <input
+          type="search"
+          class="form-control"
+          placeholder="Search Products..."
+          (input)="onSearchInput($event)"
+        />
+      </div>
     </div>
   </div>
 </nav>
