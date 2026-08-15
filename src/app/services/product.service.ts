@@ -4,6 +4,7 @@ import axios, {AxiosResponse} from 'axios';
 import {ProductModel} from '../models/product/ProductModel';
 import {environment} from '../../enviroments/enviroment';
 import {BehaviorSubject} from 'rxjs';
+import {Page} from '../models/utils/PageModel';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,41 @@ export class ProductService {
     })
   }
 
-  getProductList (filter?: FilterModel): Promise<AxiosResponse<ProductModel[]>> {
-    return this.api.post<ProductModel[]>('', filter)
+
+  private filterState = new BehaviorSubject<FilterModel>({
+    term: '',
+    brand: '',
+    category: '',
+    maxPrice: 999999,
+    minPrice: 0,
+  });
+
+  // exposed as Observable so outside components can't call .next() directly
+  filter$ = this.filterState.asObservable();
+
+  updateTerm(term: string): void {
+    this.filterState.next({
+      ...this.filterState.getValue(),
+      term
+    });
+  }
+
+  updateFilter(partial: Partial<FilterModel>): void {
+    this.filterState.next({
+      ...this.filterState.getValue(),
+      ...partial
+    });
+  }
+
+  getSnapshot(): FilterModel {
+    return this.filterState.getValue();
+  }
+
+  getProductList (filter?: FilterModel) {
+    // if (!filter) {
+    //   filter = this.getSnapshot();
+    // }
+    return this.api.post<Page<ProductModel>>('', filter)
   }
 
   setProducts(products: ProductModel[]) {
@@ -34,5 +68,9 @@ export class ProductService {
 
   getProductById(id: String) {
     return this.api.get<ProductModel>(`/${id}`);
+  }
+
+  search(filter: FilterModel) {
+    return this.api.post<Page<ProductModel>>('', filter)
   }
 }
