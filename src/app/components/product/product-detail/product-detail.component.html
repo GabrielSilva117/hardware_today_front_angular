@@ -1,8 +1,36 @@
-<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-  <div style="text-align: center;">
-    <h2>{{ product?.name }}</h2>
-    <p>{{ product?.description}}</p>
-    <p>{{product?.brand?.name}} | {{product?.category?.name}}</p>
-    <p>R$ {{ product?.price }}</p>
+<div class="pd-root">
+
+  <!-- Left: image -->
+  <div class="pd-image-col">
+    <div class="pd-image-wrap">
+      <img [src]="product?.image?.detail" [alt]="product?.image?.altText" />
+    </div>
   </div>
+
+  <!-- Right: info -->
+  <div class="pd-info-col">
+    <p class="pd-eyebrow">{{ product?.category?.name }} · {{ product?.brand?.name }}</p>
+    <h1 class="pd-name">{{ product?.name }}</h1>
+    <hr class="pd-divider" />
+
+    <p class="pd-price">R$ {{ product?.price | number:'1.2-2' }}</p>
+
+    <p class="pd-desc-label">Description</p>
+    <p class="pd-desc">{{ product?.description }}</p>
+
+    <div class="pd-qty-row">
+      <span class="pd-qty-label">Quantity</span>
+      <div class="pd-qty-ctrl">
+        <button (click)="changeQty(-1)" aria-label="-">−</button>
+        <span>{{ qty }}</span>
+        <button (click)="changeQty(1)" aria-label="+">+</button>
+      </div>
+    </div>
+
+    <button mat-flat-button color="primary" (click)="addToCart()" class="pd-add-btn">
+      <mat-icon>shopping_cart</mat-icon>
+      Add to cart
+    </button>
+  </div>
+
 </div>
