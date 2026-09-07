@@ -2,5 +2,11 @@
   <app-product-filter [paginatedProdPayload]="productService.products$" (selectProducts)="receiveFilter($event)"></app-product-filter>
   <br>
   <app-product-list [filteredProducts]="productList"></app-product-list>
+  <mat-paginator
+    [length]="totalElements"
+    [pageSize]="pageSize"
+    [pageIndex]="pageNumber"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="onPage($event)">
+  </mat-paginator>
 </div>
-
