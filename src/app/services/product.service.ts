@@ -51,11 +51,11 @@ export class ProductService {
     return this.filterState.getValue();
   }
 
-  getProductList (filter?: FilterModel) {
+  getProductList (filter?: FilterModel, page: number = 0, size: number = 12) {
     // if (!filter) {
     //   filter = this.getSnapshot();
     // }
-    return this.api.post<Page<ProductModel>>('', filter)
+    return this.api.post<Page<ProductModel>>('', filter, { params: { page, size } })
   }
 
   setProducts(products: ProductModel[]) {
