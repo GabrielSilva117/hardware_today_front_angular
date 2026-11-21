@@ -3,6 +3,7 @@
 <!--    (click)="openProductPage(prod.id)"-->
     <li *ngFor="let prod of filteredProducts" (click)="openProductPage(prod.id)" class="product-iem">
       <p>{{prod.name}}</p>
+      <img *ngIf="!prod?.image?.gallery" style="width: 300px; height: 360px" src="{{prod.category.image?.detail}}" alt="{{prod?.image?.altText}}"/>
       <p>R${{prod.price}}</p>
       <button mat-mini-fab (click)="addProductToCart($event, prod.id)" class="add-to-cart-btn"><mat-icon class="cart-icon">shopping_cart</mat-icon></button>
     </li>
