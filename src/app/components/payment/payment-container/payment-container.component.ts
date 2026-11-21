@@ -57,6 +57,10 @@ export class PaymentContainerComponent implements OnDestroy {
     this.sub?.unsubscribe(); // avoid duplicate subscriptions if called twice
     this.sub = this.wsService.connect(cartId).subscribe({
       next: (payload) => {
+        if (payload?.status === 'PROCESSING') {
+          // Not terminal - CARD payments resolve later via the Stripe webhook, keep waiting.
+          return;
+        }
         const success = payload?.status === 'SUCCESS';
         this.state = success ? 'payment_success' : 'payment_error';
         if (success) {
@@ -70,6 +74,8 @@ export class PaymentContainerComponent implements OnDestroy {
               void this.router.navigate(['/orders']);
             }
           }, 3000);
+        } else {
+          this.sub?.unsubscribe();
         }
       },
       error: (err) => {

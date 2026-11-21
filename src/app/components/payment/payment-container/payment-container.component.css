@@ -2,8 +2,8 @@
   display: grid;
   grid-template-columns: 1fr 340px;
   width: 100%;
-  max-width: 800px;
-  background: #1a1a1f;
+  max-width: 1000px;
+  background: #42474a;
   border: 0.5px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   overflow: hidden;
