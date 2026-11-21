@@ -1,6 +1,9 @@
 .cart-page {
   display: grid;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   margin: 50px auto;
+  width: 100%;
+  max-width: 720px;
+  padding: 0 16px;
 }
