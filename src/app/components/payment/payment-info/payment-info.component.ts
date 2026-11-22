@@ -1,14 +1,11 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import {FormBuilder, FormsModule} from '@angular/forms';
+import { AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
+import {FormsModule} from '@angular/forms';
 import {NgForOf, NgIf} from '@angular/common';
 import {DefaultButtonComponent} from '../../utils/default-button/default-button.component';
 import {PaymentPayload} from '../../../models/payment/paymentPayload';
 import {PaymentType} from '../../../models/payment/PaymentType';
 import {CartService} from '../../../services/cart.service';
-
-// import {lookup} from 'binlookup'
-
-
+import {StripeService} from '../../../services/stripe.service';
 
 @Component({
   selector: 'app-payment-info',
@@ -21,16 +18,20 @@ import {CartService} from '../../../services/cart.service';
   ],
   styleUrls: ['./payment-info.component.scss']
 })
-export class PaymentInfoComponent {
-  constructor(private cartService: CartService) { }
+export class PaymentInfoComponent implements AfterViewInit, OnDestroy {
+  constructor(private cartService: CartService, private stripeService: StripeService) { }
 
   @Output() paymentSubmit = new EventEmitter<PaymentPayload>();
+  @ViewChild('cardNumberElement') cardNumberElementRef?: ElementRef<HTMLElement>;
+  @ViewChild('cardExpiryElement') cardExpiryElementRef?: ElementRef<HTMLElement>;
+  @ViewChild('cardCvcElement') cardCvcElementRef?: ElementRef<HTMLElement>;
 
   selectedMethod: PaymentType = 'CARD';
   methods: PaymentType[] = ['CARD', 'pix', 'boleto', 'paypal'];
 
-  card = { number: '', expirationDate: '', cvv: '', cardHolderName: '' };
   cpf = '';
+  cardError: string | null = null;
+  submitting = false;
 
   get payButtonLabel(): string {
     const labels: Record<PaymentType, string> = {
@@ -42,23 +43,46 @@ export class PaymentInfoComponent {
     return labels[this.selectedMethod];
   }
 
-  onSubmit(): void {
-    this.cartService.getCartId().then(res => {
-      console.log(res);
+  ngAfterViewInit(): void {
+    if (this.cardNumberElementRef && this.cardExpiryElementRef && this.cardCvcElementRef) {
+      this.stripeService.mountCardElements({
+        number: this.cardNumberElementRef.nativeElement,
+        expiry: this.cardExpiryElementRef.nativeElement,
+        cvc: this.cardCvcElementRef.nativeElement
+      }).catch(() => this.cardError = 'Could not load card input, please reload the page.');
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.stripeService.unmountCardElements();
+  }
+
+  async onSubmit(): Promise<void> {
+    if (this.submitting) return;
+    this.submitting = true;
+    this.cardError = null;
+
+    try {
+      let paymentMethodId: string | undefined;
+      if (this.selectedMethod === 'CARD') {
+        paymentMethodId = await this.stripeService.createPaymentMethod();
+      }
+
+      const res = await this.cartService.getCartId();
       const cartId = res.data;
       const payload: PaymentPayload = {
         type: this.selectedMethod,
         amount: 213,
         cartId: cartId,
         currency: 'USD',
-        ...(this.selectedMethod === 'CARD' && { ...this.card }),
+        ...(this.selectedMethod === 'CARD' && { paymentMethodId }),
         ...(this.selectedMethod === 'boleto' && { cpf: this.cpf }),
       };
       this.paymentSubmit.emit(payload);
-    })
-  }
-
-  formatCardNumber(value: string): string {
-    return value.replace(/\D/g, '').slice(0, 16).replace(/(.{4})/g, '$1 ').trim();
+    } catch (e) {
+      this.cardError = e instanceof Error ? e.message : 'Failed to process card details.';
+    } finally {
+      this.submitting = false;
+    }
   }
 }

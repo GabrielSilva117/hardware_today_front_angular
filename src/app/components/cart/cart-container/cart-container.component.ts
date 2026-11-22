@@ -3,7 +3,8 @@ import {CartModel} from '../../../models/cart/CartModel';
 import {NgForOf, NgIf} from '@angular/common';
 import {CartService} from '../../../services/cart.service';
 import {Router} from '@angular/router';
-import {MatButton} from '@angular/material/button';
+import {MatButton, MatIconButton} from '@angular/material/button';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-cart-container',
@@ -11,6 +12,8 @@ import {MatButton} from '@angular/material/button';
     NgForOf,
     NgIf,
     MatButton,
+    MatIconButton,
+    MatIcon,
   ],
   templateUrl: './cart-container.component.html',
   styleUrl: './cart-container.component.css'
@@ -18,6 +21,7 @@ import {MatButton} from '@angular/material/button';
 export class CartContainerComponent {
   @Input() cart!: CartModel;
   @Input() isActiveCart: boolean = false;
+  readonly fallbackImage = 'http://localhost:9000/ht-product-assets/e8196503-a1f4-4938-82ac-869a67ab7b97.jpeg';
 
   constructor(private cartService: CartService, private router: Router) {}
 

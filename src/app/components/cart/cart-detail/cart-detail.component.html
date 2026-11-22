@@ -1,8 +1,7 @@
 <div *ngIf="cart && cart.id">
   <app-cart-container [cart]="cart" [isActiveCart]="true"></app-cart-container>
-  <
-  <p>Total: <b>R$ {{ cart.totalPrice }}</b></p>
-  <div>
+  <p class="cart-total">Total: <b>R$ {{ cart.totalPrice }}</b></p>
+  <div class="cart-actions">
     <button mat-button="filled" (click)="proceedToCheckout()">
       Proceed
     </button>

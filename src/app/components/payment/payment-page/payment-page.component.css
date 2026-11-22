@@ -3,7 +3,9 @@
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  background: #0f0f0f;
+  width: 70%;
+  margin: 0 auto;
+  background: #42474a;
   padding: 2rem;
 
   app-default-button {

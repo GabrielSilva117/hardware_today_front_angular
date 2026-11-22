@@ -11,25 +11,22 @@
   </div>
 
   <!-- Card form -->
-  <div class="method-panel" *ngIf="selectedMethod === 'CARD'">
+  <div class="method-panel" [hidden]="selectedMethod !== 'CARD'">
     <div class="field">
       <label>Card number</label>
-      <input [(ngModel)]="card.number" placeholder="1234 5678 9012 3456" maxlength="19" />
+      <div #cardNumberElement class="stripe-card-element"></div>
     </div>
     <div class="field-row">
       <div class="field">
         <label>Expiration</label>
-        <input [(ngModel)]="card.expirationDate" placeholder="MM/YY" maxlength="5" />
+        <div #cardExpiryElement class="stripe-card-element"></div>
       </div>
       <div class="field">
         <label>CVV</label>
-        <input [(ngModel)]="card.cvv" placeholder="•••" type="password" maxlength="4" />
+        <div #cardCvcElement class="stripe-card-element"></div>
       </div>
     </div>
-    <div class="field">
-      <label>Cardholder name</label>
-      <input [(ngModel)]="card.cardHolderName" placeholder="Name on card" />
-    </div>
+    <p class="field-error" *ngIf="cardError">{{ cardError }}</p>
   </div>
 
   <!-- PIX panel -->

@@ -1,6 +1,6 @@
 import {Component, inject, Input} from '@angular/core';
 import {ProductModel} from '../../../models/product/ProductModel';
-import {NgForOf} from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
 import {Router} from '@angular/router';
 import {MatMiniFabButton} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
@@ -12,7 +12,8 @@ import { NotificationService } from '../../../services/notification.service';
   imports: [
     NgForOf,
     MatMiniFabButton,
-    MatIconModule
+    MatIconModule,
+    NgIf
   ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
